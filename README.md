@@ -2,60 +2,50 @@
 
 Static personal site for `brettpascall.com`.
 
-This repo intentionally has no backend, no build step, no database, and no account system. GitHub Pages can serve it directly from the repository root.
+This repo intentionally has no backend, no database, no account system, and no required build step. It is meant to deploy on Cloudflare Pages from the `main` branch.
 
-## Deploy With GitHub Pages
+## Deploy With Cloudflare Pages
 
-1. Push this repository to `Daydream108/brettpascall`.
-2. In GitHub, open `Settings` -> `Pages`.
-3. Set `Source` to `Deploy from a branch`.
-4. Set branch to `main` and folder to `/root`.
-5. Confirm the custom domain is `brettpascall.com`.
-6. Wait for GitHub to issue the certificate, then enable `Enforce HTTPS`.
+1. In Cloudflare, go to `Workers & Pages`.
+2. Select `Create application`.
+3. Select the `Pages` tab.
+4. Select `Import an existing Git repository`.
+5. Connect GitHub if Cloudflare asks for access.
+6. Choose `Daydream108/brettpascall`.
+7. Use these build settings:
 
-The `CNAME` file is already set to:
+| Setting | Value |
+| --- | --- |
+| Project name | `brettpascall` |
+| Production branch | `main` |
+| Framework preset | `None` |
+| Build command | `exit 0` |
+| Build output directory | `/` |
+| Root directory | `/` |
 
-```txt
-brettpascall.com
-```
+8. Select `Save and Deploy`.
 
-## Cloudflare DNS For GitHub Pages
+Cloudflare will deploy a temporary `*.pages.dev` URL first. After that works, add the real domain.
 
-In Cloudflare, use these records for the apex domain:
+## Connect brettpascall.com
 
-| Type | Name | Content | Proxy status |
-| --- | --- | --- | --- |
-| A | @ | 185.199.108.153 | DNS only |
-| A | @ | 185.199.109.153 | DNS only |
-| A | @ | 185.199.110.153 | DNS only |
-| A | @ | 185.199.111.153 | DNS only |
+1. Open the new Cloudflare Pages project.
+2. Go to `Custom domains`.
+3. Select `Set up a domain`.
+4. Enter `brettpascall.com`.
+5. Follow Cloudflare's confirmation flow.
 
-Optional IPv6 records:
+If `brettpascall.com` is already managed in this same Cloudflare account, Cloudflare should add the DNS record automatically. If it asks you to create a record, use the record Cloudflare shows in the Pages custom-domain flow rather than manually guessing one.
 
-| Type | Name | Content | Proxy status |
-| --- | --- | --- | --- |
-| AAAA | @ | 2606:50c0:8000::153 | DNS only |
-| AAAA | @ | 2606:50c0:8001::153 | DNS only |
-| AAAA | @ | 2606:50c0:8002::153 | DNS only |
-| AAAA | @ | 2606:50c0:8003::153 | DNS only |
+Optional but recommended:
 
-For `www`:
+1. Add another custom domain for `www.brettpascall.com`.
+2. Add a redirect rule from `www.brettpascall.com/*` to `https://brettpascall.com/$1`, or make `www` the secondary domain.
 
-| Type | Name | Content | Proxy status |
-| --- | --- | --- | --- |
-| CNAME | www | Daydream108.github.io | DNS only |
+## Why Not GitHub Pages?
 
-Keep records DNS only while GitHub provisions HTTPS. After everything works, Cloudflare proxying is optional, but this site does not need it.
+The GitHub repository is private. GitHub Pages requires a public repo on GitHub Free, but Cloudflare Pages can deploy from a private GitHub repository after you grant Cloudflare access to it.
 
-## Cloudflare Pages Alternative
+## Comments
 
-You do not need a Worker for this site.
-
-If you prefer Cloudflare Pages instead of GitHub Pages:
-
-1. Cloudflare dashboard -> `Workers & Pages` -> `Create application` -> `Pages`.
-2. Connect the `Daydream108/brettpascall` GitHub repo.
-3. Use no build command and `/` as the output directory.
-4. Add `brettpascall.com` under the Pages project's custom domains.
-
-That route is also static-only. Workers would only be useful later for server-side features like comments, forms, auth, or private APIs.
+Comments and reactions are not included because this is a static-only site. Adding visitor comments later would require a backend service, a third-party embed, or Cloudflare Workers/Pages Functions.
