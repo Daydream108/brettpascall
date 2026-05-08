@@ -1675,3 +1675,119 @@ em {
     margin: 0 12px;
   }
 }
+
+/* Confidence pass: tighter, cleaner, less portfolio-template */
+.hero {
+  min-height: auto;
+  padding-top: 64px;
+  padding-bottom: 46px;
+  gap: 48px;
+}
+
+.hero__grid {
+  align-items: center;
+}
+
+.hero h1 {
+  font-size: clamp(62px, 6.8vw, 104px);
+}
+
+.hero__sub {
+  margin-top: 40px;
+}
+
+.portrait {
+  max-width: 420px;
+  transform: translateY(-10px);
+}
+
+.portrait img {
+  aspect-ratio: 1 / 1.08;
+  filter: saturate(0.78) contrast(1.08) brightness(0.8);
+}
+
+.portrait figcaption {
+  padding: 0 1px;
+}
+
+.hero__ticker {
+  margin-top: 18px;
+}
+
+.section {
+  padding-top: 92px;
+  padding-bottom: 92px;
+}
+
+.contact {
+  min-height: auto;
+  padding-bottom: 92px;
+}
+
+.contact__grid {
+  grid-template-columns: minmax(0, 0.78fr) minmax(430px, 1fr);
+  align-items: center;
+}
+
+.contact__list {
+  border-top: 1px solid var(--line);
+}
+
+.contact__list a {
+  background: rgba(255, 255, 255, 0.012);
+  border-top: 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.contact__list a:hover,
+.contact__list a:focus-visible {
+  background: rgba(224, 132, 90, 0.055);
+  outline: none;
+}
+
+.contact__list strong {
+  color: var(--ink);
+}
+
+.resume-contact {
+  gap: 8px;
+}
+
+.resume-contact span,
+.resume-contact a {
+  background: transparent;
+}
+
+.site-footer__role,
+.site-footer__col a {
+  color: rgba(243, 239, 231, 0.52);
+}
+
+@media (max-width: 920px) {
+  .hero {
+    padding-top: 44px;
+  }
+
+  .portrait {
+    max-width: 430px;
+    transform: none;
+  }
+
+  .contact__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .hero h1 {
+    font-size: 48px;
+  }
+
+  .portrait {
+    max-width: 100%;
+  }
+
+  .portrait img {
+    aspect-ratio: 1 / 1.02;
+  }
+}

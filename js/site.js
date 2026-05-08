@@ -85,7 +85,7 @@ function footer() {
           </div>
           <div class="site-footer__col">
             <span class="site-footer__label">Contact</span>
-            <a href="mailto:hello@brettpascall.com">hello@brettpascall.com</a>
+            <a href="https://www.linkedin.com/in/brett-pascall/" target="_blank" rel="noopener">LinkedIn</a>
             <a href="#/resume">Resume</a>
           </div>
         </div>
@@ -311,14 +311,9 @@ function contact() {
       <div class="contact__grid">
         <div>
           <h2>Reach out for <em>partnerships</em>, <em>writing</em>, or a <em>conversation</em>.</h2>
-          <p>Best way to find me is email. I read everything; I reply to most things.</p>
+          <p>Best way to reach me publicly is LinkedIn. For anything specific, send context and make it worth both our calendars.</p>
         </div>
         <div class="contact__list">
-          <a href="mailto:hello@brettpascall.com">
-            <span>Email</span>
-            <strong>hello@brettpascall.com</strong>
-            ${externalIcon()}
-          </a>
           <a href="https://www.linkedin.com/in/brett-pascall/" target="_blank" rel="noopener">
             <span>LinkedIn</span>
             <strong>in/brett-pascall</strong>
@@ -481,8 +476,6 @@ function resumePage() {
         <p>Commercial Customer Success Manager in Austin, Texas, focused on SaaS adoption, renewals, AI-enabled customer workflows, and product feedback loops.</p>
         <div class="resume-contact" aria-label="Contact details">
           <span>Austin, TX</span>
-          <a href="mailto:brettpascall@yahoo.com">brettpascall@yahoo.com</a>
-          <a href="tel:+15129650846">512-965-0846</a>
           <a href="https://www.linkedin.com/in/brett-pascall/" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </header>
