@@ -343,7 +343,7 @@ em {
 
 .about__meta div {
   display: grid;
-  grid-template-columns: 150px 1fr;
+  grid-template-columns: 120px 1fr;
   gap: 20px;
   padding: 14px 0;
   border-bottom: 1px solid var(--line);
@@ -1725,18 +1725,25 @@ em {
 }
 
 .contact__grid {
-  grid-template-columns: minmax(0, 0.78fr) minmax(430px, 1fr);
+  grid-template-columns: minmax(0, 0.82fr) minmax(390px, 0.92fr);
+  gap: 64px;
   align-items: center;
 }
 
 .contact__list {
   border-top: 1px solid var(--line);
+  max-width: 560px;
+  justify-self: end;
+  width: 100%;
 }
 
 .contact__list a {
+  min-height: 68px;
+  grid-template-columns: 110px 1fr auto;
   background: rgba(255, 255, 255, 0.012);
   border-top: 0;
   border-bottom: 1px solid var(--line);
+  padding: 0;
 }
 
 .contact__list a:hover,

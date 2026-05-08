@@ -149,10 +149,7 @@ function about() {
           <p>Today I sit on Optimizely's CS AI Cabinet, partnering with Product and Engineering to shape the AI roadmap and prioritize LLM-powered features against real customer use cases. Before that, Datadog and Sprinklr taught me how to scale trust at speed.</p>
           <p>Outside of my role, I'm building. SafeHaven Ventures is the personal holding company for the projects below, and this site is where I think out loud about what I'm learning along the way.</p>
           <dl class="about__meta">
-            <div><dt>Role</dt><dd>Commercial Customer Success Manager</dd></div>
-            <div><dt>Company</dt><dd>Optimizely</dd></div>
             <div><dt>Based in</dt><dd>Austin, Texas</dd></div>
-            <div><dt>Previously</dt><dd>Datadog / Sprinklr</dd></div>
             <div><dt>Building</dt><dd>SafeHaven Ventures</dd></div>
           </dl>
         </div>
@@ -310,13 +307,18 @@ function contact() {
       ${sectionLabel("06", "Contact")}
       <div class="contact__grid">
         <div>
-          <h2>Reach out for <em>partnerships</em>, <em>writing</em>, or a <em>conversation</em>.</h2>
-          <p>Best way to reach me publicly is LinkedIn. For anything specific, send context and make it worth both our calendars.</p>
+          <h2>Find me where the work is already moving.</h2>
+          <p>LinkedIn for professional context, writing for the longer version, resume for the receipts.</p>
         </div>
         <div class="contact__list">
           <a href="https://www.linkedin.com/in/brett-pascall/" target="_blank" rel="noopener">
             <span>LinkedIn</span>
             <strong>in/brett-pascall</strong>
+            ${externalIcon()}
+          </a>
+          <a href="#/writing">
+            <span>Writing</span>
+            <strong>Essays and notes</strong>
             ${externalIcon()}
           </a>
           <a href="#/resume">
