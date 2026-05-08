@@ -1,51 +1,53 @@
 # Brett Pascall
 
-Static personal site for `brettpascall.com`.
+Static personal site for `brettpascall.com`, deployed as a Cloudflare Worker with Workers Static Assets.
 
-This repo intentionally has no backend, no database, no account system, and no required build step. It is meant to deploy on Cloudflare Pages from the `main` branch.
+This repo intentionally has no backend, no database, and no account system. The Worker is only being used as the static site host/origin.
 
-## Deploy With Cloudflare Pages
+## Deploy
 
-1. In Cloudflare, go to `Workers & Pages`.
-2. Select `Create application`.
-3. Select the `Pages` tab.
-4. Select `Import an existing Git repository`.
-5. Connect GitHub if Cloudflare asks for access.
-6. Choose `Daydream108/brettpascall`.
-7. Use these build settings:
+The public assets are copied into `dist/`, which is ignored by Git. Wrangler deploys the `dist/` directory using `wrangler.jsonc`.
 
-| Setting | Value |
-| --- | --- |
-| Project name | `brettpascall` |
-| Production branch | `main` |
-| Framework preset | `None` |
-| Build command | `exit 0` |
-| Build output directory | `/` |
-| Root directory | `/` |
+```powershell
+New-Item -ItemType Directory -Force dist,dist\js,dist\assets | Out-Null
+Copy-Item -LiteralPath index.html,styles.css,robots.txt,sitemap.xml -Destination dist -Force
+Copy-Item -LiteralPath js\data.js,js\site.js -Destination dist\js -Force
+Copy-Item -LiteralPath assets\brett-headshot.jpg,assets\Brett-Pascall-Resume-2026.pdf -Destination dist\assets -Force
+npx.cmd wrangler deploy
+```
 
-8. Select `Save and Deploy`.
+The Worker config declares:
 
-Cloudflare will deploy a temporary `*.pages.dev` URL first. After that works, add the real domain.
+```jsonc
+{
+  "name": "brettpascall",
+  "compatibility_date": "2026-05-08",
+  "routes": [
+    {
+      "pattern": "brettpascall.com",
+      "custom_domain": true
+    }
+  ],
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application"
+  }
+}
+```
 
-## Connect brettpascall.com
+## Domain
 
-1. Open the new Cloudflare Pages project.
-2. Go to `Custom domains`.
-3. Select `Set up a domain`.
-4. Enter `brettpascall.com`.
-5. Follow Cloudflare's confirmation flow.
+`brettpascall.com` is attached as a Worker custom domain. Cloudflare creates the needed Worker DNS record and certificate for the hostname.
 
-If `brettpascall.com` is already managed in this same Cloudflare account, Cloudflare should add the DNS record automatically. If it asks you to create a record, use the record Cloudflare shows in the Pages custom-domain flow rather than manually guessing one.
+If a local browser still shows `DNS_PROBE_FINISHED_NXDOMAIN`, the local resolver is stale. Public resolvers may already see the domain before the local router does.
 
-Optional but recommended:
+Useful checks:
 
-1. Add another custom domain for `www.brettpascall.com`.
-2. Add a redirect rule from `www.brettpascall.com/*` to `https://brettpascall.com/$1`, or make `www` the secondary domain.
-
-## Why Not GitHub Pages?
-
-The GitHub repository is private. GitHub Pages requires a public repo on GitHub Free, but Cloudflare Pages can deploy from a private GitHub repository after you grant Cloudflare access to it.
+```powershell
+nslookup brettpascall.com 1.1.1.1
+nslookup brettpascall.com 8.8.8.8
+```
 
 ## Comments
 
-Comments and reactions are not included because this is a static-only site. Adding visitor comments later would require a backend service, a third-party embed, or Cloudflare Workers/Pages Functions.
+Comments and reactions are not included because this is a static-only site. Adding visitor comments later would require a backend service, a third-party embed, or Cloudflare Workers storage.
