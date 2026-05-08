@@ -1,53 +1,45 @@
 # Brett Pascall
 
-Static personal site for `brettpascall.com`, deployed as a Cloudflare Worker with Workers Static Assets.
+Static personal site for `brettpascall.com`.
 
-This repo intentionally has no backend, no database, and no account system. The Worker is only being used as the static site host/origin.
+This repository is set up for the same workflow as Bookcase: push to GitHub, then Cloudflare Pages deploys automatically from the GitHub repository.
 
-## Deploy
+## Cloudflare Pages Settings
 
-The public assets are copied into `dist/`, which is ignored by Git. Wrangler deploys the `dist/` directory using `wrangler.jsonc`.
+Use one Cloudflare Pages project connected to `Daydream108/brettpascall`.
 
-```powershell
-New-Item -ItemType Directory -Force dist,dist\js,dist\assets | Out-Null
-Copy-Item -LiteralPath index.html,styles.css,robots.txt,sitemap.xml -Destination dist -Force
-Copy-Item -LiteralPath js\data.js,js\site.js -Destination dist\js -Force
-Copy-Item -LiteralPath assets\brett-headshot.jpg,assets\Brett-Pascall-Resume-2026.pdf -Destination dist\assets -Force
-npx.cmd wrangler deploy
-```
+| Setting | Value |
+| --- | --- |
+| Framework preset | `None` |
+| Production branch | `main` |
+| Build command | leave blank |
+| Build output directory | `public` |
+| Root directory | `/` |
 
-The Worker config declares:
-
-```jsonc
-{
-  "name": "brettpascall",
-  "compatibility_date": "2026-05-08",
-  "routes": [
-    {
-      "pattern": "brettpascall.com",
-      "custom_domain": true
-    }
-  ],
-  "assets": {
-    "directory": "./dist",
-    "not_found_handling": "single-page-application"
-  }
-}
-```
+The deployable site files are committed in `public/`.
 
 ## Domain
 
-`brettpascall.com` is attached as a Worker custom domain. Cloudflare creates the needed Worker DNS record and certificate for the hostname.
+Attach `brettpascall.com` to the Cloudflare Pages project as a custom domain.
 
-If a local browser still shows `DNS_PROBE_FINISHED_NXDOMAIN`, the local resolver is stale. Public resolvers may already see the domain before the local router does.
+Recommended:
 
-Useful checks:
+1. Add `brettpascall.com` as the primary custom domain.
+2. Add `www.brettpascall.com` as a secondary custom domain or redirect it to the root domain.
 
-```powershell
-nslookup brettpascall.com 1.1.1.1
-nslookup brettpascall.com 8.8.8.8
-```
+## What To Delete In Cloudflare
+
+To avoid mixed deployments, keep only one Cloudflare Pages project for this site.
+
+Delete:
+
+- The manual Worker named `brettpascall` that uses `brettpascall.com`.
+- Any extra duplicate Pages project that is not connected to `Daydream108/brettpascall`.
+
+Keep:
+
+- One Cloudflare Pages project connected to `Daydream108/brettpascall`.
 
 ## Comments
 
-Comments and reactions are not included because this is a static-only site. Adding visitor comments later would require a backend service, a third-party embed, or Cloudflare Workers storage.
+Comments and reactions are not included because this is static-only. Adding visitor comments later would require a backend service, a third-party embed, or Cloudflare storage.
