@@ -18,6 +18,35 @@ Use one Cloudflare Pages project connected to `Daydream108/brettpascall`.
 
 The deployable site files are committed in `public/`.
 
+## Create A Blog Post
+
+Run this from the repo root:
+
+```powershell
+node scripts/new-post.mjs "My New Post Title" Building
+```
+
+Then edit the new draft at the top of `public/js/data.js`:
+
+- `excerpt` is the summary shown on the Writing page.
+- `body` is an array of paragraphs.
+- `category` should match one of the categories in the same file.
+- `readTime` is the displayed reading time in minutes.
+
+After editing:
+
+```powershell
+git add public/js/data.js
+git commit -m "add new blog post"
+git push
+```
+
+Cloudflare Pages will deploy from GitHub automatically.
+
+## Resume Page
+
+The resume is rendered as a static HTML page at `#/resume`. The PDF is not published in `public/`, so visitors see the web page instead of a download link.
+
 ## Domain
 
 Attach `brettpascall.com` to the Cloudflare Pages project as a custom domain.

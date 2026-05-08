@@ -54,7 +54,7 @@ function nav() {
           <a href="#/writing">Writing</a>
           <a href="#/?section=media" data-section-link="media">Media</a>
           <a href="#/?section=contact" data-section-link="contact">Contact</a>
-          <a href="assets/Brett-Pascall-Resume-2026.pdf" target="_blank" rel="noopener">Resume</a>
+          <a href="#/resume">Resume</a>
         </nav>
       </div>
     </header>
@@ -75,6 +75,7 @@ function footer() {
             <a href="#/">Home</a>
             <a href="#/?section=projects" data-section-link="projects">Projects</a>
             <a href="#/writing">Writing</a>
+            <a href="#/resume">Resume</a>
           </div>
           <div class="site-footer__col">
             <span class="site-footer__label">Elsewhere</span>
@@ -86,7 +87,7 @@ function footer() {
           <div class="site-footer__col">
             <span class="site-footer__label">Contact</span>
             <a href="mailto:hello@brettpascall.com">hello@brettpascall.com</a>
-            <a href="assets/Brett-Pascall-Resume-2026.pdf" target="_blank" rel="noopener">Resume</a>
+            <a href="#/resume">Resume</a>
           </div>
         </div>
       </div>
@@ -116,7 +117,7 @@ function hero() {
           </div>
         </div>
         <figure class="portrait">
-          <img src="assets/brett-headshot.jpg" alt="Brett Pascall">
+          <img src="assets/brett-portrait.jpg" alt="Brett Pascall">
           <figcaption>
             <span>Customer Success Manager</span>
             <span>Builder</span>
@@ -323,9 +324,9 @@ function contact() {
             <strong>in/brett-pascall</strong>
             ${externalIcon()}
           </a>
-          <a href="assets/Brett-Pascall-Resume-2026.pdf" target="_blank" rel="noopener">
+          <a href="#/resume">
             <span>Resume</span>
-            <strong>PDF</strong>
+            <strong>Experience</strong>
             ${externalIcon()}
           </a>
         </div>
@@ -426,8 +427,125 @@ function postPage(slug) {
   `;
 }
 
+function resumePage() {
+  document.title = "Resume / Brett Pascall";
+  const experience = [
+    {
+      role: "Commercial Customer Success Manager",
+      company: "Optimizely",
+      dates: "Feb 2025 - Present",
+      location: "Austin, TX",
+      bullets: [
+        "Own a portfolio of 28 commercial accounts representing $6.1M+ ARR; manage full lifecycle from onboarding through renewal and expansion, delivering 97% gross retention in 2025 and tracking 94% YTD in 2026.",
+        "Selected to Optimizely's CS AI Cabinet; partner with Product and Engineering to shape the CS AI roadmap and prioritize LLM-powered features based on customer use cases.",
+        "Lead customer onboarding and adoption for Opal, Optimizely's LLM-powered agent platform; run enablement workshops and pilot programs across enterprise CMS accounts.",
+        "Drive fast time-to-value through technical integration guidance, best-practice activation, and trusted-advisor relationships with C-suite and developer champions.",
+        "Monitor account health, usage signals, and engagement metrics in Gainsight and Salesforce to surface risk early and identify upsell and cross-sell opportunities."
+      ]
+    },
+    {
+      role: "Scaled Customer Success Manager",
+      company: "Datadog",
+      dates: "Nov 2023 - Feb 2025",
+      location: "Austin, TX",
+      bullets: [
+        "Managed 150+ commercial accounts ranging from $10K to $250K+ ARR, balancing personalized engagement with scalable, programmatic outreach.",
+        "Owned full renewal cycles and upsell negotiations in HubSpot and Salesforce; averaged 121% quota attainment across Q2-Q4 FY24, with a peak quarter of 150%.",
+        "Built scalable success resources, guides, and reference implementations that accelerated time-to-value across the broader commercial segment.",
+        "Served as voice of the customer to Product and GTM, feeding usage and product insights back to influence roadmap and self-serve experience."
+      ]
+    },
+    {
+      role: "Senior Enterprise Relationship Manager, Team Lead",
+      company: "Sprinklr",
+      dates: "Feb 2022 - Oct 2023",
+      location: "Austin, TX",
+      bullets: [
+        "Sourced $8.2M+ in qualified pipeline in the large enterprise sector, consistently surpassing quota and leading discovery calls with C-suite executives.",
+        "Mentored new SDR hires on discovery, value messaging, and cross-departmental execution."
+      ]
+    }
+  ];
+
+  const skills = [
+    ["Customer Success", "Onboarding and activation, adoption, renewals, upsell and cross-sell, account health, voice of customer, lifecycle management"],
+    ["Tools", "Salesforce, HubSpot, Gainsight, Zendesk, Clari, Tableau, Metabase, Jira, LinkedIn Sales Navigator, Slack"],
+    ["AI / Technical", "LLM-powered products, RAG, LangChain, API-first SaaS, ChatGPT, Claude, Gemini"]
+  ];
+
+  return `
+    <main class="page page--resume">
+      <header class="page__header resume-hero">
+        <p class="page__crumb"><a href="#/">Home</a> / Resume</p>
+        <h1>Brett Pascall</h1>
+        <p>Commercial Customer Success Manager in Austin, Texas, focused on SaaS adoption, renewals, AI-enabled customer workflows, and product feedback loops.</p>
+        <div class="resume-contact" aria-label="Contact details">
+          <span>Austin, TX</span>
+          <a href="mailto:brettpascall@yahoo.com">brettpascall@yahoo.com</a>
+          <a href="tel:+15129650846">512-965-0846</a>
+          <a href="https://www.linkedin.com/in/brett-pascall/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </header>
+      <section class="resume-section">
+        <h2>Experience</h2>
+        <div class="resume-timeline">
+          ${experience.map((job) => `
+            <article class="resume-job">
+              <div>
+                <h3>${job.role}</h3>
+                <p>${job.company}</p>
+              </div>
+              <div class="resume-job__meta">
+                <span>${job.dates}</span>
+                <span>${job.location}</span>
+              </div>
+              <ul>
+                ${job.bullets.map((bullet) => `<li>${bullet}</li>`).join("")}
+              </ul>
+            </article>
+          `).join("")}
+        </div>
+      </section>
+      <section class="resume-section resume-grid">
+        <div>
+          <h2>Education</h2>
+          <article class="resume-card">
+            <h3>Bachelor of Business Administration, Management</h3>
+            <p>Angelo State University / San Angelo, TX / 2021 / 3.72 GPA</p>
+          </article>
+        </div>
+        <div>
+          <h2>Certifications</h2>
+          <article class="resume-card">
+            <h3>Command of the Message</h3>
+            <p>Force Management / Datadog / 2023</p>
+          </article>
+          <article class="resume-card">
+            <h3>MEDDIC Certified</h3>
+            <p>Force Management / Datadog / 2023</p>
+          </article>
+        </div>
+      </section>
+      <section class="resume-section">
+        <h2>Skills</h2>
+        <div class="resume-skills">
+          ${skills.map(([label, value]) => `
+            <article>
+              <h3>${label}</h3>
+              <p>${value}</p>
+            </article>
+          `).join("")}
+        </div>
+      </section>
+    </main>
+  `;
+}
+
 function pageForRoute(route) {
   document.title = "Brett Pascall";
+  if (route.startsWith("#/resume")) {
+    return resumePage();
+  }
   if (route.startsWith("#/writing/")) {
     return postPage(route.replace("#/writing/", "").split("?")[0]);
   }

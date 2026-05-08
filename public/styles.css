@@ -220,7 +220,7 @@ em {
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
-  object-position: 72% 50%;
+  object-position: center;
 }
 
 .portrait figcaption {
@@ -774,6 +774,129 @@ em {
   max-width: 920px;
 }
 
+.page--resume {
+  max-width: 1040px;
+}
+
+.resume-hero {
+  max-width: 920px;
+}
+
+.resume-contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.resume-contact span,
+.resume-contact a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  padding: 0 12px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.resume-contact a:hover,
+.resume-contact a:focus-visible {
+  border-color: var(--accent);
+  color: var(--ink);
+  outline: none;
+}
+
+.resume-section {
+  border-top: 1px solid var(--line);
+  padding: 36px 0;
+}
+
+.resume-section h2 {
+  margin: 0 0 22px;
+  color: var(--accent-dark);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.resume-timeline {
+  display: grid;
+  gap: 18px;
+}
+
+.resume-job,
+.resume-card,
+.resume-skills article {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 22px;
+}
+
+.resume-job {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 18px 28px;
+}
+
+.resume-job h3,
+.resume-card h3,
+.resume-skills h3 {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.2;
+}
+
+.resume-job p,
+.resume-card p,
+.resume-skills p {
+  margin: 6px 0 0;
+  color: var(--muted);
+}
+
+.resume-job__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 170px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 800;
+  text-align: right;
+}
+
+.resume-job ul {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding-left: 20px;
+  color: #303530;
+}
+
+.resume-job li + li {
+  margin-top: 8px;
+}
+
+.resume-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+.resume-grid .resume-card + .resume-card {
+  margin-top: 12px;
+}
+
+.resume-skills {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
 .post__header {
   margin-left: auto;
   margin-right: auto;
@@ -914,8 +1037,19 @@ em {
 
   .writing__list,
   .media__grid,
+  .resume-grid,
+  .resume-skills,
   .site-footer__cols {
     grid-template-columns: 1fr;
+  }
+
+  .resume-job {
+    grid-template-columns: 1fr;
+  }
+
+  .resume-job__meta {
+    min-width: 0;
+    text-align: left;
   }
 
   .post-row {
