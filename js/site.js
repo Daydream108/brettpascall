@@ -54,7 +54,6 @@ function nav() {
           <a href="#/writing">Writing</a>
           <a href="#/?section=media" data-section-link="media">Media</a>
           <a href="#/?section=contact" data-section-link="contact">Contact</a>
-          <a href="#/resume">Resume</a>
         </nav>
       </div>
     </header>
@@ -105,7 +104,7 @@ function hero() {
       <div class="hero__grid">
         <div class="hero__copy">
           <p class="hero__eyebrow"><span></span>Austin, Texas / Available for conversation</p>
-          <h1>Building, operating, and thinking <em>out loud.</em></h1>
+          <h1>Building,<br>operating,<br>and thinking <em>out loud.</em></h1>
           <p class="hero__sub">
             I'm Brett Pascall, a Customer Success Manager based in Austin, Texas, building products under
             <strong>SafeHaven Ventures</strong> and writing about technology, product thinking, career growth,
@@ -120,6 +119,7 @@ function hero() {
           <img src="assets/brett-portrait.jpg" alt="Brett Pascall">
           <figcaption>
             <span>Customer Success Manager</span>
+            <span>/</span>
             <span>Builder</span>
           </figcaption>
         </figure>
