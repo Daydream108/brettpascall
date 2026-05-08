@@ -86,7 +86,7 @@ function footer() {
           <div class="site-footer__col">
             <span class="site-footer__label">Contact</span>
             <a href="https://www.linkedin.com/in/brett-pascall/" target="_blank" rel="noopener">LinkedIn</a>
-            <a href="#/resume">Resume</a>
+            <a href="mailto:hello@brettpascall.com">hello@brettpascall.com</a>
           </div>
         </div>
       </div>
@@ -308,7 +308,7 @@ function contact() {
       <div class="contact__grid">
         <div>
           <h2>Find me where the work is already moving.</h2>
-          <p>LinkedIn for professional context, writing for the longer version, resume for the receipts.</p>
+          <p>LinkedIn for professional context. Email for anything specific enough to deserve a real reply.</p>
         </div>
         <div class="contact__list">
           <a href="https://www.linkedin.com/in/brett-pascall/" target="_blank" rel="noopener">
@@ -316,14 +316,9 @@ function contact() {
             <strong>in/brett-pascall</strong>
             ${externalIcon()}
           </a>
-          <a href="#/writing">
-            <span>Writing</span>
-            <strong>Essays and notes</strong>
-            ${externalIcon()}
-          </a>
-          <a href="#/resume">
-            <span>Resume</span>
-            <strong>Experience</strong>
+          <a href="mailto:hello@brettpascall.com">
+            <span>Email</span>
+            <strong>hello@brettpascall.com</strong>
             ${externalIcon()}
           </a>
         </div>
@@ -466,8 +461,8 @@ function resumePage() {
 
   const skills = [
     ["Customer Success", "Onboarding and activation, adoption, renewals, upsell and cross-sell, account health, voice of customer, lifecycle management"],
-    ["Tools", "Salesforce, HubSpot, Gainsight, Zendesk, Clari, Tableau, Metabase, Jira, LinkedIn Sales Navigator, Slack"],
-    ["AI / Technical", "LLM-powered products, RAG, LangChain, API-first SaaS, ChatGPT, Claude, Gemini"]
+    ["Tools", "Salesforce, HubSpot, Gainsight, Zendesk, Clari, Tableau, Metabase, Jira, LinkedIn Sales Navigator, Slack, VS Code"],
+    ["AI / Technical", "LLM-powered products, RAG, LangChain, API-first SaaS, ChatGPT, Claude, Gemini, Codex"]
   ];
 
   return `

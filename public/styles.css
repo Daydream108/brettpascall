@@ -972,7 +972,9 @@ em {
 
 .site-footer__col {
   display: grid;
+  grid-auto-rows: minmax(28px, auto);
   gap: 8px;
+  align-content: start;
 }
 
 .site-footer__label {
@@ -1301,7 +1303,7 @@ em {
 
 .portrait img {
   aspect-ratio: 4 / 5;
-  filter: saturate(0.72) contrast(1.04) brightness(0.82);
+  filter: saturate(0.74) contrast(1.04) brightness(0.84);
 }
 
 .portrait figcaption {
@@ -1727,7 +1729,7 @@ em {
 .contact__grid {
   grid-template-columns: minmax(0, 0.82fr) minmax(390px, 0.92fr);
   gap: 64px;
-  align-items: center;
+  align-items: start;
 }
 
 .contact__list {
@@ -1738,12 +1740,16 @@ em {
 }
 
 .contact__list a {
-  min-height: 68px;
+  min-height: 74px;
   grid-template-columns: 110px 1fr auto;
   background: rgba(255, 255, 255, 0.012);
   border-top: 0;
   border-bottom: 1px solid var(--line);
   padding: 0;
+}
+
+.contact__list a:first-child {
+  border-top: 0;
 }
 
 .contact__list a:hover,
@@ -1795,6 +1801,6 @@ em {
   }
 
   .portrait img {
-    aspect-ratio: 1 / 1.02;
+    aspect-ratio: 4 / 5;
   }
 }
