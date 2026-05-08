@@ -1699,13 +1699,16 @@ em {
 }
 
 .portrait {
-  max-width: 420px;
+  max-width: 380px;
   transform: translateY(-10px);
 }
 
 .portrait img {
-  aspect-ratio: 1 / 1.08;
-  filter: saturate(0.78) contrast(1.08) brightness(0.8);
+  aspect-ratio: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  filter: saturate(0.78) contrast(1.06) brightness(0.82);
 }
 
 .portrait figcaption {
@@ -1801,6 +1804,6 @@ em {
   }
 
   .portrait img {
-    aspect-ratio: 4 / 5;
+    aspect-ratio: auto;
   }
 }
