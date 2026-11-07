@@ -1,422 +1,64 @@
 const DATA = window.SITE_DATA;
-const app = document.getElementById("app");
-let activeCategory = "All";
+const app = document.getElementById('app');
+const publishedPosts = () => DATA.posts.filter(post => post.published === true);
+const external = 'target="_blank" rel="noopener noreferrer"';
 
-function formatDate(iso) {
-  return new Date(`${iso}T00:00:00`).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric"
-  });
+function externalIcon() { return '<span aria-hidden="true">↗</span>'; }
+function arrowLink(label, href, attrs = '') {
+  return `<a class="text-link" href="${href}" ${attrs}>${label} ${externalIcon()}</a>`;
 }
-
-function getRoute() {
-  return window.location.hash || "#/";
-}
-
-function sectionLabel(index, text) {
-  return `
-    <div class="section-label">
-      <span class="section-label__index">${index}</span>
-      <span class="section-label__rule"></span>
-      <span class="section-label__text">${text}</span>
-    </div>
-  `;
-}
-
-function tag(label, tone = "") {
-  return `<span class="tag ${tone ? `tag--${tone}` : ""}">${label}</span>`;
-}
-
-function externalIcon() {
-  return `
-    <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
-      <path d="M3 11L11 3M5 3h6v6" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
-    </svg>
-  `;
-}
-
-function arrowLink(label, href, attrs = "") {
-  return `<a href="${href}" class="arrow-link" ${attrs}><span>${label}</span>${externalIcon()}</a>`;
-}
-
 function nav() {
-  return `
-    <header class="site-nav">
-      <div class="site-nav__inner">
-        <a href="#/" class="brand" aria-label="Brett Pascall home">
-          <span class="brand__mark">BP</span>
-          <span class="brand__name">Brett Pascall</span>
-        </a>
-        <nav class="site-nav__links" aria-label="Primary navigation">
-          <a href="#/?section=about" data-section-link="about">About</a>
-          <a href="#/?section=projects" data-section-link="projects">Projects</a>
-          <a href="#/writing">Writing</a>
-          <a href="#/?section=media" data-section-link="media">Media</a>
-          <a href="#/?section=contact" data-section-link="contact">Contact</a>
-        </nav>
-      </div>
-    </header>
-  `;
+  return `<a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-nav"><a class="brand" href="#/" aria-label="Brett Pascall home">Brett Pascall<span class="brand-dot">.</span></a>
+    <nav aria-label="Primary navigation">
+      <a href="#/?section=about">About</a><a href="#/?section=work">Work</a>
+      <a href="#/?section=contact">Contact</a>
+    </nav></header>`;
 }
-
 function footer() {
-  return `
-    <footer class="site-footer">
-      <div class="site-footer__inner">
-        <div>
-          <div class="site-footer__name">Brett Pascall</div>
-          <p class="site-footer__role">Customer Success / Builder / Austin, TX</p>
-        </div>
-        <div class="site-footer__cols">
-          <div class="site-footer__col">
-            <span class="site-footer__label">Site</span>
-            <a href="#/">Home</a>
-            <a href="#/?section=projects" data-section-link="projects">Projects</a>
-            <a href="#/writing">Writing</a>
-            <a href="#/resume">Resume</a>
-          </div>
-          <div class="site-footer__col">
-            <span class="site-footer__label">Elsewhere</span>
-            <a href="https://www.linkedin.com/in/brett-pascall/" target="_blank" rel="noopener">LinkedIn</a>
-            <a href="https://muckrack.com/brett-pascall/articles" target="_blank" rel="noopener">Muck Rack</a>
-            <a href="https://bookcasehq.com/" target="_blank" rel="noopener">Bookcase</a>
-            <a href="https://collab.sundance.org/people/Brett-Pascall-1617246437" target="_blank" rel="noopener">Sundance Collab</a>
-          </div>
-          <div class="site-footer__col">
-            <span class="site-footer__label">Contact</span>
-            <a href="https://www.linkedin.com/in/brett-pascall/" target="_blank" rel="noopener">LinkedIn</a>
-            <a href="mailto:hello@brettpascall.com">hello@brettpascall.com</a>
-          </div>
-        </div>
-      </div>
-      <div class="site-footer__base">
-        <span>&copy; 2026 Brett Pascall / SafeHaven Ventures</span>
-        <span>Built in public.</span>
-      </div>
-    </footer>
-  `;
+  return `<footer class="site-footer"><span>© ${new Date().getFullYear()} Brett Pascall</span><span>Austin, Texas</span><a href="#/resume">Résumé <span aria-hidden="true">↗</span></a></footer>`;
 }
-
-function hero() {
-  return `
-    <section class="hero">
-      <div class="hero__grid">
-        <div class="hero__copy">
-          <p class="hero__eyebrow"><span></span>Austin, Texas / Available for conversation</p>
-          <h1>Building,<br>operating,<br>and thinking <em>out loud.</em></h1>
-          <p class="hero__sub">
-            I'm Brett Pascall, a Customer Success Manager based in Austin, Texas, building products under
-            <strong>SafeHaven Ventures</strong> and writing about technology, product thinking, career growth,
-            and long-term trends.
-          </p>
-          <div class="hero__cta">
-            ${arrowLink("See what I'm building", "#/?section=projects", 'data-section-link="projects"')}
-            ${arrowLink("Read the writing", "#/writing")}
-          </div>
-        </div>
-        <figure class="portrait">
-          <img src="assets/brett-portrait.jpg" alt="Brett Pascall">
-          <figcaption>
-            <span>Customer Success Manager</span>
-            <span>/</span>
-            <span>Builder</span>
-          </figcaption>
-        </figure>
-      </div>
-      <div class="hero__ticker" aria-label="Current focus">
-        <span>SafeHaven Ventures</span>
-        <span>Bookcase</span>
-        <span>Verdict Trade Signals</span>
-        <span>Writing</span>
-        <span>HYROX Anaheim 2026</span>
-        <span>Austin, TX</span>
-      </div>
-    </section>
-  `;
-}
-
-function about() {
-  return `
-    <section class="section about" id="about">
-      ${sectionLabel("01", "About")}
-      <div class="about__grid">
-        <div class="about__lede">
-          <p>I work at the intersection of <em>technology, product, and business</em>, helping companies adopt and scale digital platforms in a way that actually drives outcomes.</p>
-        </div>
-        <div class="about__body">
-          <p>My experience is in SaaS, where I've managed SMB to enterprise customer relationships, led renewals and strategic conversations, and partnered with stakeholders to turn product capabilities into measurable results.</p>
-          <p>Today I sit on Optimizely's CS AI Cabinet, partnering with Product and Engineering to shape the AI roadmap and prioritize LLM-powered features against real customer use cases. Before that, Datadog and Sprinklr taught me how to scale trust at speed.</p>
-          <p>Outside of my role, I'm building. SafeHaven Ventures is the personal holding company for the projects below, and this site is where I think out loud about what I'm learning along the way.</p>
-          <dl class="about__meta">
-            <div><dt>Based in</dt><dd>Austin, Texas</dd></div>
-            <div><dt>Building</dt><dd>SafeHaven Ventures</dd></div>
-          </dl>
-        </div>
-      </div>
-    </section>
-  `;
-}
-
-function projects() {
-  return `
-    <section class="section projects" id="projects">
-      ${sectionLabel("02", "Projects")}
-      <div class="section__head">
-        <h2>What I'm building under SafeHaven.</h2>
-        <p>A holding company is just a shelf. These are the things on it.</p>
-      </div>
-      <div class="projects__list">
-        ${DATA.projects
-          .map(
-            (project, index) => `
-              <article class="project">
-                <div class="project__index">${String(index + 1).padStart(2, "0")}</div>
-                <div class="project__main">
-                  <div class="project__head">
-                    <h3>${project.name}</h3>
-                    ${tag(project.status, project.tone)}
-                  </div>
-                  <p class="project__tagline">${project.tagline}</p>
-                  <p>${project.description}</p>
-                  <div class="project__foot">
-                    <span>${project.role}</span>
-                    ${
-                      project.url
-                        ? arrowLink("Visit site", project.url, 'target="_blank" rel="noopener"')
-                        : `<span class="project__soon">Details soon</span>`
-                    }
-                  </div>
-                </div>
-              </article>
-            `
-          )
-          .join("")}
-      </div>
-    </section>
-  `;
-}
-
-function postCard(post, large = false) {
-  return `
-    <a href="#/writing/${post.slug}" class="post-card ${large ? "post-card--large" : ""}">
-      <div class="post-card__meta">
-        <span>${post.category}</span>
-        <span>${formatDate(post.date)}</span>
-        <span>${post.readTime} min read</span>
-      </div>
-      <h3>${post.title}</h3>
-      <p>${post.excerpt}</p>
-      <span class="post-card__cta">Read essay ${externalIcon()}</span>
-    </a>
-  `;
-}
-
-function writingPreview() {
-  return `
-    <section class="section writing" id="writing">
-      ${sectionLabel("03", "Writing")}
-      <div class="section__head section__head--row">
-        <div>
-          <h2>Notes from the desk.</h2>
-          <p>Short essays on product, building, career, and long-term thinking.</p>
-        </div>
-        ${arrowLink("View all posts", "#/writing")}
-      </div>
-      <div class="writing__list">
-        ${DATA.posts.slice(0, 3).map((post) => postCard(post)).join("")}
-      </div>
-    </section>
-  `;
-}
-
-function media() {
-  return `
-    <section class="section media" id="media">
-      ${sectionLabel("04", "Media and Creative Work")}
-      <div class="media__intro">
-        <span>Creative background</span>
-        <p>Before focusing fully on SaaS and building, I spent time in media, conducting interviews and working on creative projects. That experience shaped how I think about <em>storytelling, audiences, and communication</em>, which still influences how I operate and build today.</p>
-      </div>
-      <div class="media__featured">
-        <div class="media__featured-mark">Featured</div>
-        <div>
-          <p class="media__eyebrow">Film / Director</p>
-          <h3>A short film through Sundance Collab.</h3>
-          <p>I directed a short film through Sundance Institute's Collab program: a study in restraint, framing, and the discipline of cutting an idea down to its essential frame.</p>
-          ${arrowLink("View on Sundance Collab", "https://collab.sundance.org/people/Brett-Pascall-1617246437", 'target="_blank" rel="noopener"')}
-        </div>
-      </div>
-      <div class="media__interviews">
-        <p class="media__sublabel">Selected interviews</p>
-        <div class="media__grid">
-          ${DATA.interviews
-            .map(
-              (item) => `
-                <article class="interview">
-                  <span>${item.year}</span>
-                  <h4>${item.title}</h4>
-                  <p class="interview__person">${item.person}</p>
-                  <p>${item.description}</p>
-                  <a href="https://muckrack.com/brett-pascall/articles" target="_blank" rel="noopener">Read interview</a>
-                </article>
-              `
-            )
-            .join("")}
-        </div>
-      </div>
-    </section>
-  `;
-}
-
-function outside() {
-  const items = [
-    ["Pool league", "Weekly. Long game, narrow margins."],
-    ["Soccer", "Watching and playing, perpetual student."],
-    ["HYROX Anaheim", "Training block in progress."],
-    ["Reading", "Dogfooding Bookcase, by definition."]
-  ];
-
-  return `
-    <section class="section outside" id="outside">
-      ${sectionLabel("05", "Outside of Work")}
-      <div class="outside__grid">
-        <div class="outside__lede">
-          <p>Fitness and competition are part of how I stay <em>consistent, disciplined, and focused</em> outside of work. None of these are hobbies in the resume sense. They are practice for the work.</p>
-        </div>
-        <ul class="outside__list">
-          ${items
-            .map(
-              ([label, note]) => `
-                <li>
-                  <span>${label}</span>
-                  <span>${note}</span>
-                </li>
-              `
-            )
-            .join("")}
-        </ul>
-      </div>
-    </section>
-  `;
-}
-
-function contact() {
-  return `
-    <section class="section contact" id="contact">
-      ${sectionLabel("06", "Contact")}
-      <div class="contact__grid">
-        <div>
-          <h2>Find me where the work is already moving.</h2>
-          <p>LinkedIn for professional context. Email for anything specific enough to deserve a real reply.</p>
-        </div>
-        <div class="contact__list">
-          <a href="https://www.linkedin.com/in/brett-pascall/" target="_blank" rel="noopener">
-            <span>LinkedIn</span>
-            <strong>in/brett-pascall</strong>
-            ${externalIcon()}
-          </a>
-          <a href="mailto:hello@brettpascall.com">
-            <span>Email</span>
-            <strong>hello@brettpascall.com</strong>
-            ${externalIcon()}
-          </a>
-        </div>
-      </div>
-    </section>
-  `;
-}
-
 function homePage() {
-  return `<main class="home">${hero()}${about()}${projects()}${writingPreview()}${media()}${outside()}${contact()}</main>`;
-}
-
-function writingPage() {
-  const posts = activeCategory === "All" ? DATA.posts : DATA.posts.filter((post) => post.category === activeCategory);
-  return `
-    <main class="page page--writing">
-      <header class="page__header">
-        <p class="page__crumb"><a href="#/">Home</a> / Writing</p>
-        <h1>Writing</h1>
-        <p>Short essays on product, customer success, building, career growth, and the long arc.</p>
-        <div class="page__meta">
-          <span>${DATA.posts.length} posts</span>
-          <span>Updated regularly</span>
-        </div>
-      </header>
-      <div class="filters" aria-label="Filter posts">
-        ${DATA.categories
-          .map(
-            (category) => `
-              <button type="button" class="filter ${activeCategory === category ? "is-active" : ""}" data-filter="${category}">
-                ${category}
-              </button>
-            `
-          )
-          .join("")}
+  return `<main id="main" tabindex="-1">
+    <section class="hero" aria-labelledby="intro-title">
+      <div class="hero-copy"><p class="eyebrow">Customer success · Austin, Texas</p>
+        <h1 id="intro-title">Hi, I’m Brett<span class="accent">.</span></h1>
+        <p class="hero-intro">I work with people<br class="desktop-break"> and the software they use.</p>
+        <p class="hero-note">I’m a customer success manager at Optimizely. Before that, Datadog and Sprinklr. Outside of work, I’m usually reading, playing pool, or following soccer.</p>
+        <div class="hero-links">${arrowLink('A little about me', '#/?section=about')}${arrowLink('LinkedIn', 'https://www.linkedin.com/in/brett-pascall/', external)}</div>
       </div>
-      <div class="post-list">
-        ${posts
-          .map(
-            (post) => `
-              <a href="#/writing/${post.slug}" class="post-row">
-                <div class="post-row__date">${formatDate(post.date)}</div>
-                <div class="post-row__main">
-                  <span>${post.category}</span>
-                  <h3>${post.title}</h3>
-                  <p>${post.excerpt}</p>
-                </div>
-                <div class="post-row__time">${post.readTime} min</div>
-                ${externalIcon()}
-              </a>
-            `
-          )
-          .join("")}
+      <figure class="portrait"><img src="assets/brett-pascall.jpg" alt="Brett Pascall smiling in a charcoal jacket and white shirt" width="2500" height="1667" fetchpriority="high"><figcaption>Brett Pascall <span>Austin, TX</span></figcaption></figure>
+    </section>
+    <section id="about" class="section section-grid" aria-labelledby="about-title">
+      <div><p class="eyebrow">A little about me</p><h2 id="about-title">People first. <br>Always curious.</h2></div>
+      <div class="prose"><p class="lead">My work starts with understanding what someone is trying to do, then helping them get there.</p>
+      <p>I’ve worked with customers across SaaS, from smaller businesses to enterprise teams. That includes onboarding, adoption, renewals, and bringing customer feedback back to the people building the product.</p>
+      <p>Before tech, I spent time in media and interviewing people about their creative work. I still enjoy that part: asking questions, listening, and finding the interesting detail.</p></div>
+    </section>
+    <section id="work" class="section section-grid" aria-labelledby="work-title">
+      <div><p class="eyebrow">My experience</p><h2 id="work-title">Where I’ve <br>spent my time.</h2>${arrowLink('View my résumé', '#/resume')}</div>
+      <div class="experience-list">
+        <article class="job"><div class="job-heading"><h3>Optimizely</h3><span>2025 — Present</span></div><p class="job-role">Commercial Customer Success Manager</p><p>Helping customers adopt the platform, navigate renewals, and put new capabilities to use. I also contribute to the CS AI Cabinet.</p></article>
+        <article class="job"><div class="job-heading"><h3>Datadog</h3><span>2023 — 2025</span></div><p class="job-role">Scaled Customer Success Manager</p><p>Supporting commercial customers through adoption, renewal, and growth.</p></article>
+        <article class="job"><div class="job-heading"><h3>Sprinklr</h3><span>2022 — 2023</span></div><p class="job-role">Senior Enterprise Relationship Manager, Team Lead</p><p>Building enterprise relationships and helping new teammates get started.</p></article>
       </div>
-    </main>
-  `;
+    </section>
+    ${DATA.projects.length ? `<section id="projects" class="section section-grid" aria-labelledby="project-title"><div><p class="eyebrow">A personal project</p><h2 id="project-title">For the love <br>of a good book.</h2></div><article class="bookcase"><p class="eyebrow">Reading & technology</p><h3>Bookcase</h3><p>A place to discover books, keep track of what you’re reading, and share recommendations. A personal project that brings together two of my interests.</p>${arrowLink('Visit Bookcase', 'https://bookcasehq.com/', external)}</article></section>` : ''}
+    <section id="media" class="section section-grid" aria-labelledby="media-title"><div><p class="eyebrow">A creative background</p><h2 id="media-title">Writing, interviews <br>& film.</h2></div><div class="prose"><p>I’ve also worked on interviews and creative projects. You can find my published work and film profile here.</p><div class="profile-links">${arrowLink('Writing & interviews on Muck Rack', 'https://muckrack.com/brett-pascall/articles', external)}${arrowLink('My Sundance Collab profile', 'https://collab.sundance.org/people/Brett-Pascall-1617246437', external)}</div></div></section>
+    ${publishedPosts().length ? `<section class="section section-grid"><div><p class="eyebrow">Writing</p><h2>Recent notes.</h2></div><div>${publishedPosts().slice(0,3).map(post => `<p>${arrowLink(post.title, '#/writing/' + post.slug)}</p>`).join('')}${arrowLink('All writing', '#/writing')}</div></section>` : ''}
+    <section class="section section-grid outside" aria-labelledby="outside-title"><div><p class="eyebrow">Away from the screen</p><h2 id="outside-title">And the rest.</h2></div><div class="prose"><p class="lead">Pool league, soccer, fitness, and a book in progress.</p><p>That’s a pretty good picture of how I spend my time outside of work.</p></div></section>
+    <section id="contact" class="contact" aria-labelledby="contact-title"><p class="eyebrow">Get in touch</p><h2 id="contact-title">It’s nice to meet you.</h2><p>Want to talk work, books, or something else? Say hello.</p><div class="contact-links">${arrowLink('hello@brettpascall.com', 'mailto:hello@brettpascall.com')}${arrowLink('Find me on LinkedIn', 'https://www.linkedin.com/in/brett-pascall/', external)}</div></section>
+  </main>`;
 }
-
-function postPage(slug) {
-  const post = DATA.posts.find((item) => item.slug === slug);
-  if (!post) {
-    document.title = "Post not found / Brett Pascall";
-    return `
-      <main class="page">
-        <header class="page__header">
-          <h1>Post not found.</h1>
-          <p>That essay isn't here. Try the <a href="#/writing">writing index</a>.</p>
-        </header>
-      </main>
-    `;
+function writingPage(slug) {
+  const posts = publishedPosts();
+  const post = posts.find(item => item.slug === slug);
+  if (post) {
+    document.title = `${post.title} / Brett Pascall`;
+    return `<main id="main" tabindex="-1" class="page page--post"><a href="#/writing" class="text-link">← All writing</a><h1>${post.title}</h1><article class="prose">${post.body.map(p=>`<p>${p}</p>`).join('')}</article></main>`;
   }
-
-  document.title = `${post.title} / Brett Pascall`;
-  const more = DATA.posts.filter((item) => item.slug !== slug).slice(0, 2);
-  return `
-    <main class="page page--post">
-      <header class="post__header">
-        <p class="page__crumb"><a href="#/">Home</a> / <a href="#/writing">Writing</a> / ${post.category}</p>
-        <h1>${post.title}</h1>
-        <div class="post__meta">
-          <span>${formatDate(post.date)}</span>
-          <span>${post.category}</span>
-          <span>${post.readTime} min read</span>
-        </div>
-      </header>
-      <article class="post__body">
-        <p class="post__lede">${post.excerpt}</p>
-        ${post.body.map((paragraph) => `<p>${paragraph}</p>`).join("")}
-        <div class="post__signoff">
-          <span>Brett, writing from Austin</span>
-        </div>
-      </article>
-      <section class="post__more">
-        ${sectionLabel("Up next", "Keep reading")}
-        <div class="writing__list">${more.map((item) => postCard(item)).join("")}</div>
-      </section>
-    </main>
-  `;
+  document.title = 'Writing / Brett Pascall';
+  return `<main id="main" tabindex="-1" class="page"><a href="#/" class="text-link">← Home</a><h1>Writing</h1>${posts.length ? posts.map(p=>`<article class="job"><h2>${arrowLink(p.title, '#/writing/'+p.slug)}</h2><p>${p.excerpt}</p></article>`).join('') : `<p class="lead">You can find my published writing and interviews on Muck Rack.</p>${arrowLink('Browse my published work', 'https://muckrack.com/brett-pascall/articles', external)}`}</main>`;
 }
 
 function resumePage() {
@@ -531,61 +173,29 @@ function resumePage() {
   `;
 }
 
-function pageForRoute(route) {
-  document.title = "Brett Pascall";
-  if (route.startsWith("#/resume")) {
-    return resumePage();
-  }
-  if (route.startsWith("#/writing/")) {
-    return postPage(route.replace("#/writing/", "").split("?")[0]);
-  }
-  if (route.startsWith("#/writing")) {
-    return writingPage();
-  }
-  return homePage();
+
+
+function render() {
+  const route = window.location.hash || '#/';
+  document.title = 'Brett Pascall — Customer Success & More';
+  let content = route.startsWith('#/resume') ? resumePage() : route.startsWith('#/writing') ? writingPage(route.split('/')[2]) : homePage();
+  content = content.replace('<main class="page page--resume">', '<main id="main" tabindex="-1" class="page page--resume">');
+  app.innerHTML = nav() + content + footer();
+  const section = new URLSearchParams(route.split('?')[1] || '').get('section');
+  requestAnimationFrame(() => {
+    const target = section && document.getElementById(section);
+    if (target) target.scrollIntoView({block:'start'});
+    else window.scrollTo(0,0);
+  });
 }
-
-function scrollToSection(section) {
-  const element = document.getElementById(section);
-  if (element) {
-    element.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-}
-
-function render({ preserveScroll = false } = {}) {
-  const route = getRoute();
-  const params = new URLSearchParams(route.split("?")[1] || "");
-  const section = params.get("section");
-
-  app.innerHTML = `${nav()}${pageForRoute(route)}${footer()}`;
-
-  if (section) {
-    requestAnimationFrame(() => scrollToSection(section));
-  } else if (!preserveScroll) {
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-  }
-}
-
-document.addEventListener("click", (event) => {
-  const sectionLink = event.target.closest("[data-section-link]");
-  if (sectionLink) {
+document.addEventListener('click', event => {
+  const link = event.target.closest('a');
+  if (link?.getAttribute('href') === '#main') {
     event.preventDefault();
-    const section = sectionLink.getAttribute("data-section-link");
-    const route = getRoute();
-    if (route === "#/" || route.startsWith("#/?")) {
-      window.location.hash = `#/?section=${section}`;
-      scrollToSection(section);
-    } else {
-      window.location.hash = `#/?section=${section}`;
-    }
-  }
-
-  const filter = event.target.closest("[data-filter]");
-  if (filter) {
-    activeCategory = filter.getAttribute("data-filter");
-    render({ preserveScroll: true });
+    document.getElementById('main')?.focus();
+  } else if (link?.getAttribute('href') === window.location.hash) {
+    render();
   }
 });
-
-window.addEventListener("hashchange", () => render());
+window.addEventListener('hashchange', render);
 render();

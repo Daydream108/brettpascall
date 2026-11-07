@@ -16,6 +16,11 @@ const slug = title
   .replace(/[^a-z0-9]+/g, "-")
   .replace(/^-+|-+$/g, "");
 
+if (!title || !slug || !category) {
+  console.error("Provide a title containing letters or numbers and a non-empty category.");
+  process.exit(1);
+}
+
 const date = new Date().toISOString().slice(0, 10);
 const file = resolve("public/js/data.js");
 const source = readFileSync(file, "utf8");
@@ -26,10 +31,11 @@ if (source.includes(`slug: "${slug}"`)) {
 }
 
 const post = `    {
-      slug: "${slug}",
-      title: "${title.replaceAll('"', '\\"')}",
+      slug: ${JSON.stringify(slug)},
+      title: ${JSON.stringify(title)},
       date: "${date}",
-      category: "${category.replaceAll('"', '\\"')}",
+      category: ${JSON.stringify(category)},
+      published: false,
       readTime: 4,
       excerpt:
         "Write a short one- or two-sentence summary here.",
@@ -41,12 +47,13 @@ const post = `    {
     },
 `;
 
-const marker = "  posts: [\n";
-if (!source.includes(marker)) {
+const marker = /(^[\t ]*posts:\s*\[)[\t ]*(?:\r?\n)?/m;
+if (!marker.test(source)) {
   console.error("Could not find the posts array in public/js/data.js.");
   process.exit(1);
 }
 
-writeFileSync(file, source.replace(marker, marker + post), "utf8");
+writeFileSync(file, source.replace(marker, (_, opening) => `${opening}\n${post}`), "utf8");
 console.log(`Created draft post: ${slug}`);
-console.log("Edit public/js/data.js, then commit and push to deploy.");
+console.log("Edit public/js/data.js. Set published: true only when the post is ready to appear on the site.");
+console.log("Then commit and push to deploy.");

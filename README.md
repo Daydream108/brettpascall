@@ -1,74 +1,25 @@
 # Brett Pascall
 
-Static personal site for `brettpascall.com`.
+Personal website for https://brettpascall.com.
 
-This repository is set up for the same workflow as Bookcase: push to GitHub, then Cloudflare Pages deploys automatically from the GitHub repository.
+## Deployment
 
-## Cloudflare Pages Settings
+The existing Cloudflare Worker `brettpascall` is connected to `Daydream108/brettpascall`, production branch `main`. Cloudflare runs `npx wrangler deploy`. The tracked `wrangler.jsonc` publishes only `public/`; no build step is needed.
 
-Use one Cloudflare Pages project connected to `Daydream108/brettpascall`.
+Make changes in `public/`. Root HTML, CSS, JavaScript and portrait files mirror the deployed files for compatibility with the original repository layout. Keep those copies in sync.
 
-| Setting | Value |
-| --- | --- |
-| Framework preset | `None` |
-| Production branch | `main` |
-| Build command | leave blank |
-| Build output directory | `public` |
-| Root directory | `/` |
+Do not deploy the repository root: it includes editing scripts and archived content that are not part of the public website.
 
-The deployable site files are committed in `public/`.
+## Content
 
-## Create A Blog Post
+The homepage focuses on professional experience, Bookcase, creative-work profiles, and contact information. Unfinished projects and unconfirmed essays were removed from the public site. The original data is preserved in `content/archive/site-data-before-refresh.js` for reference and is not served.
 
-Run this from the repo root:
+The resume remains at `#/resume`. Previous writing routes lead to the published-work links when an essay is no longer available.
 
-```powershell
-node scripts/new-post.mjs "My New Post Title" Building
-```
+## Add writing
 
-Then edit the new draft at the top of `public/js/data.js`:
+Run `node scripts/new-post.mjs "My New Post Title" Building`.
 
-- `excerpt` is the summary shown on the Writing page.
-- `body` is an array of paragraphs.
-- `category` should match one of the categories in the same file.
-- `readTime` is the displayed reading time in minutes.
+Edit the draft in `public/js/data.js`. New posts default to `published: false` and are not shown. Set `published: true` only when the essay is ready. Mirror the data file to `js/data.js`, then commit and push to deploy. Published posts automatically appear on the homepage and writing page.
 
-After editing:
-
-```powershell
-git add public/js/data.js
-git commit -m "add new blog post"
-git push
-```
-
-Cloudflare Pages will deploy from GitHub automatically.
-
-## Resume Page
-
-The resume is rendered as a static HTML page at `#/resume`. The PDF is not published in `public/`, so visitors see the web page instead of a download link.
-
-## Domain
-
-Attach `brettpascall.com` to the Cloudflare Pages project as a custom domain.
-
-Recommended:
-
-1. Add `brettpascall.com` as the primary custom domain.
-2. Add `www.brettpascall.com` as a secondary custom domain or redirect it to the root domain.
-
-## What To Delete In Cloudflare
-
-To avoid mixed deployments, keep only one Cloudflare Pages project for this site.
-
-Delete:
-
-- The manual Worker named `brettpascall` that uses `brettpascall.com`.
-- Any extra duplicate Pages project that is not connected to `Daydream108/brettpascall`.
-
-Keep:
-
-- One Cloudflare Pages project connected to `Daydream108/brettpascall`.
-
-## Comments
-
-Comments and reactions are not included because this is static-only. Adding visitor comments later would require a backend service, a third-party embed, or Cloudflare storage.
+The archived essays are not automatically republished.
