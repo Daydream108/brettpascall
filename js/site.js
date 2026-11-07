@@ -21,33 +21,33 @@ function footer() {
 function homePage() {
   return `<main id="main" tabindex="-1">
     <section class="hero" aria-labelledby="intro-title">
-      <div class="hero-copy"><p class="eyebrow">Customer success · Austin, Texas</p>
-        <h1 id="intro-title">Hi, I’m Brett<span class="accent">.</span></h1>
-        <p class="hero-intro">I work with people<br class="desktop-break"> and the software they use.</p>
-        <p class="hero-note">I’m a customer success manager at Optimizely. Before that, Datadog and Sprinklr. Outside of work, I’m usually reading, playing pool, or following soccer.</p>
+      <div class="hero-copy"><p class="eyebrow">Hey, I’m Brett. / Austin, TX</p>
+        <h1 id="intro-title">Brett<br>Pascall<span class="accent">.</span></h1>
+        <p class="hero-intro">Customer success.<br class="desktop-break"> A creative background.</p>
+        <p class="hero-note">I work with customers at Optimizely. Previously at Datadog and Sprinklr.</p>
         <div class="hero-links">${arrowLink('A little about me', '#/?section=about')}${arrowLink('LinkedIn', 'https://www.linkedin.com/in/brett-pascall/', external)}</div>
       </div>
       <figure class="portrait"><img src="assets/brett-pascall.jpg" alt="Brett Pascall smiling in a charcoal jacket and white shirt" width="2500" height="1667" fetchpriority="high"><figcaption>Brett Pascall <span>Austin, TX</span></figcaption></figure>
     </section>
     <section id="about" class="section section-grid" aria-labelledby="about-title">
-      <div><p class="eyebrow">A little about me</p><h2 id="about-title">People first. <br>Always curious.</h2></div>
-      <div class="prose"><p class="lead">My work starts with understanding what someone is trying to do, then helping them get there.</p>
-      <p>I’ve worked with customers across SaaS, from smaller businesses to enterprise teams. That includes onboarding, adoption, renewals, and bringing customer feedback back to the people building the product.</p>
-      <p>Before tech, I spent time in media and interviewing people about their creative work. I still enjoy that part: asking questions, listening, and finding the interesting detail.</p></div>
+      <div><p class="eyebrow">About</p><h2 id="about-title">A bit about me.</h2></div>
+      <div class="prose"><p class="lead">I’m based in Austin and work in customer success.</p>
+      <p>I help teams get started with software, make it part of their day-to-day work, and figure out what they need next. I’ve worked with smaller businesses and enterprise customers.</p>
+      <p>My background also includes media, interviews, and film. These days, you’ll find that work alongside my experience in tech here.</p></div>
     </section>
     <section id="work" class="section section-grid" aria-labelledby="work-title">
-      <div><p class="eyebrow">My experience</p><h2 id="work-title">Where I’ve <br>spent my time.</h2>${arrowLink('View my résumé', '#/resume')}</div>
+      <div><p class="eyebrow">My experience</p><h2 id="work-title">The day job.</h2>${arrowLink('View my résumé', '#/resume')}</div>
       <div class="experience-list">
         <article class="job"><div class="job-heading"><h3>Optimizely</h3><span>2025 — Present</span></div><p class="job-role">Commercial Customer Success Manager</p><p>Helping customers adopt the platform, navigate renewals, and put new capabilities to use. I also contribute to the CS AI Cabinet.</p></article>
         <article class="job"><div class="job-heading"><h3>Datadog</h3><span>2023 — 2025</span></div><p class="job-role">Scaled Customer Success Manager</p><p>Supporting commercial customers through adoption, renewal, and growth.</p></article>
         <article class="job"><div class="job-heading"><h3>Sprinklr</h3><span>2022 — 2023</span></div><p class="job-role">Senior Enterprise Relationship Manager, Team Lead</p><p>Building enterprise relationships and helping new teammates get started.</p></article>
       </div>
     </section>
-    ${DATA.projects.length ? `<section id="projects" class="section section-grid" aria-labelledby="project-title"><div><p class="eyebrow">A personal project</p><h2 id="project-title">For the love <br>of a good book.</h2></div><article class="bookcase"><p class="eyebrow">Reading & technology</p><h3>Bookcase</h3><p>A place to discover books, keep track of what you’re reading, and share recommendations. A personal project that brings together two of my interests.</p>${arrowLink('Visit Bookcase', 'https://bookcasehq.com/', external)}</article></section>` : ''}
-    <section id="media" class="section section-grid" aria-labelledby="media-title"><div><p class="eyebrow">A creative background</p><h2 id="media-title">Writing, interviews <br>& film.</h2></div><div class="prose"><p>I’ve also worked on interviews and creative projects. You can find my published work and film profile here.</p><div class="profile-links">${arrowLink('Writing & interviews on Muck Rack', 'https://muckrack.com/brett-pascall/articles', external)}${arrowLink('My Sundance Collab profile', 'https://collab.sundance.org/people/Brett-Pascall-1617246437', external)}</div></div></section>
+    ${DATA.projects.length ? `<section id="projects" class="section section-grid" aria-labelledby="project-title"><div><p class="eyebrow">A personal project</p><h2 id="project-title">On the side.</h2></div><article class="bookcase"><p class="eyebrow">A place for readers</p><h3>Bookcase</h3><p>A place to discover books, keep track of what you’re reading, and share recommendations.</p>${arrowLink('Visit Bookcase', 'https://bookcasehq.com/', external)}</article></section>` : ''}
+    <section id="media" class="section section-grid" aria-labelledby="media-title"><div><p class="eyebrow">A creative background</p><h2 id="media-title">Before tech, <br>there was film.</h2></div><div class="prose"><p>I spent time interviewing people about their creative work and working on film projects. My published work and film profile are here.</p><div class="profile-links">${arrowLink('Writing & interviews on Muck Rack', 'https://muckrack.com/brett-pascall/articles', external)}${arrowLink('My Sundance Collab profile', 'https://collab.sundance.org/people/Brett-Pascall-1617246437', external)}</div></div></section>
     ${publishedPosts().length ? `<section class="section section-grid"><div><p class="eyebrow">Writing</p><h2>Recent notes.</h2></div><div>${publishedPosts().slice(0,3).map(post => `<p>${arrowLink(post.title, '#/writing/' + post.slug)}</p>`).join('')}${arrowLink('All writing', '#/writing')}</div></section>` : ''}
-    <section class="section section-grid outside" aria-labelledby="outside-title"><div><p class="eyebrow">Away from the screen</p><h2 id="outside-title">And the rest.</h2></div><div class="prose"><p class="lead">Pool league, soccer, fitness, and a book in progress.</p><p>That’s a pretty good picture of how I spend my time outside of work.</p></div></section>
-    <section id="contact" class="contact" aria-labelledby="contact-title"><p class="eyebrow">Get in touch</p><h2 id="contact-title">It’s nice to meet you.</h2><p>Want to talk work, books, or something else? Say hello.</p><div class="contact-links">${arrowLink('hello@brettpascall.com', 'mailto:hello@brettpascall.com')}${arrowLink('Find me on LinkedIn', 'https://www.linkedin.com/in/brett-pascall/', external)}</div></section>
+    <section class="section section-grid outside" aria-labelledby="outside-title"><div><p class="eyebrow">Away from the screen</p><h2 id="outside-title">Off the clock.</h2></div><div class="prose"><p class="lead">Pool league. Soccer. Fitness.</p><p>A few of the things I make time for outside of work.</p></div></section>
+    <section id="contact" class="contact" aria-labelledby="contact-title"><p class="eyebrow">Get in touch</p><h2 id="contact-title">Say hello.</h2><p>Email me or find me on LinkedIn.</p><div class="contact-links">${arrowLink('hello@brettpascall.com', 'mailto:hello@brettpascall.com')}${arrowLink('Find me on LinkedIn', 'https://www.linkedin.com/in/brett-pascall/', external)}</div></section>
   </main>`;
 }
 function writingPage(slug) {
