@@ -24,7 +24,7 @@ function homePage() {
       <div class="hero-copy"><p class="eyebrow">Hey, I’m Brett. / Austin, TX</p>
         <h1 id="intro-title">Brett<br>Pascall<span class="accent">.</span></h1>
         <p class="hero-intro">Customer success.<br class="desktop-break"> A creative background.</p>
-        <p class="hero-note">I work with customers at Optimizely. Previously at Datadog and Sprinklr.</p>
+        <p class="hero-note">I work in enterprise customer success at Optimizely. Previously at Datadog and Sprinklr.</p>
         <div class="hero-links">${arrowLink('A little about me', '#/?section=about')}${arrowLink('LinkedIn', 'https://www.linkedin.com/in/brett-pascall/', external)}</div>
       </div>
       <figure class="portrait"><img src="assets/brett-pascall.jpg" alt="Brett Pascall smiling in a charcoal jacket and white shirt" width="2500" height="1667" fetchpriority="high"><figcaption>Brett Pascall <span>Austin, TX</span></figcaption></figure>
@@ -38,7 +38,7 @@ function homePage() {
     <section id="work" class="section section-grid" aria-labelledby="work-title">
       <div><p class="eyebrow">My experience</p><h2 id="work-title">The day job.</h2>${arrowLink('View my résumé', '#/resume')}</div>
       <div class="experience-list">
-        <article class="job"><div class="job-heading"><h3>Optimizely</h3><span>2025 — Present</span></div><p class="job-role">Commercial Customer Success Manager</p><p>Helping customers adopt the platform, navigate renewals, and put new capabilities to use. I also contribute to the CS AI Cabinet.</p></article>
+        <article class="job"><div class="job-heading"><h3>Optimizely</h3><span>2025 — Present</span></div><p class="job-role">Enterprise Customer Success Manager</p><p>Helping customers adopt the platform, navigate renewals, and put new capabilities to use. I also contribute to the CS AI Cabinet.</p></article>
         <article class="job"><div class="job-heading"><h3>Datadog</h3><span>2023 — 2025</span></div><p class="job-role">Scaled Customer Success Manager</p><p>Supporting commercial customers through adoption, renewal, and growth.</p></article>
         <article class="job"><div class="job-heading"><h3>Sprinklr</h3><span>2022 — 2023</span></div><p class="job-role">Senior Enterprise Relationship Manager, Team Lead</p><p>Building enterprise relationships and helping new teammates get started.</p></article>
       </div>
@@ -65,12 +65,12 @@ function resumePage() {
   document.title = "Resume / Brett Pascall";
   const experience = [
     {
-      role: "Commercial Customer Success Manager",
+      role: "Enterprise Customer Success Manager",
       company: "Optimizely",
       dates: "Feb 2025 - Present",
       location: "Austin, TX",
       bullets: [
-        "Own a portfolio of 28 commercial accounts representing $6.1M+ ARR; manage full lifecycle from onboarding through renewal and expansion, delivering 97% gross retention in 2025 and tracking 94% YTD in 2026.",
+        "Own a portfolio of 28 accounts representing $6.1M+ ARR; manage full lifecycle from onboarding through renewal and expansion, delivering 97% gross retention in 2025 and tracking 94% YTD in 2026.",
         "Selected to Optimizely's CS AI Cabinet; partner with Product and Engineering to shape the CS AI roadmap and prioritize LLM-powered features based on customer use cases.",
         "Lead customer onboarding and adoption for Opal, Optimizely's LLM-powered agent platform; run enablement workshops and pilot programs across enterprise CMS accounts.",
         "Drive fast time-to-value through technical integration guidance, best-practice activation, and trusted-advisor relationships with C-suite and developer champions.",
@@ -112,7 +112,7 @@ function resumePage() {
       <header class="page__header resume-hero">
         <p class="page__crumb"><a href="#/">Home</a> / Resume</p>
         <h1>Brett Pascall</h1>
-        <p>Commercial Customer Success Manager in Austin, Texas, focused on SaaS adoption, renewals, AI-enabled customer workflows, and product feedback loops.</p>
+        <p>Enterprise Customer Success Manager in Austin, Texas, focused on SaaS adoption, renewals, AI-enabled customer workflows, and product feedback loops.</p>
         <div class="resume-contact" aria-label="Contact details">
           <span>Austin, TX</span>
           <a href="https://www.linkedin.com/in/brett-pascall/" target="_blank" rel="noopener">LinkedIn</a>
