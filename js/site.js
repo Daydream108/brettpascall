@@ -90,13 +90,23 @@ function resumePage() {
       ]
     },
     {
-      role: "Senior Enterprise Relationship Manager, Team Lead",
+      role: "Senior SDR / Team Lead",
       company: "Sprinklr",
-      dates: "Feb 2022 - Oct 2023",
+      dates: "Feb 2023 - Oct 2023",
       location: "Austin, TX",
       bullets: [
-        "Sourced $8.2M+ in qualified pipeline in the large enterprise sector, consistently surpassing quota and leading discovery calls with C-suite executives.",
-        "Mentored new SDR hires on discovery, value messaging, and cross-departmental execution."
+        "Promoted to Senior SDR / Team Lead on my one-year anniversary at Sprinklr.",
+        "Mentored new SDR hires on discovery, value messaging, and cross-departmental execution.",
+        "Across my tenure at Sprinklr, sourced $8.2M+ in qualified pipeline in the large enterprise sector while consistently surpassing quota."
+      ]
+    },
+    {
+      role: "Business Development Representative (BDR)",
+      company: "Sprinklr",
+      dates: "Feb 2022 - Feb 2023",
+      location: "Austin, TX",
+      bullets: [
+        "Developed qualified pipeline in the large enterprise sector and led discovery conversations with C-suite executives."
       ]
     }
   ];
