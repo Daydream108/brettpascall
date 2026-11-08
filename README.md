@@ -2,6 +2,10 @@
 
 Personal website for https://brettpascall.com.
 
+## Approved design
+
+The approved November 8, 2026 design is saved as the GitHub tag `design-baseline-2026-11-08`. Read [DESIGN_BASELINE.md](DESIGN_BASELINE.md) before future edits for the visual direction, approved content, file locations, deployment process, and restoration instructions.
+
 ## Deployment
 
 The existing Cloudflare Worker `brettpascall` is connected to `Daydream108/brettpascall`, production branch `main`. Cloudflare runs `npx wrangler deploy`. The tracked `wrangler.jsonc` publishes only `public/`; no build step is needed.
